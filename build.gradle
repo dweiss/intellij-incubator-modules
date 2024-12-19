@@ -1,0 +1,31 @@
+plugins {
+  id 'base'
+}
+
+allprojects {
+  group "com.carrotsearch.exp"
+  version "1.0.0"
+}
+
+subprojects {
+  apply plugin: "java-library"
+
+  java {
+    sourceCompatibility = 21
+    targetCompatibility = 21
+  }
+}
+
+configure(project(":core.service")) {
+  apply plugin: "java-library"
+
+  dependencies {
+    implementation project(":core")
+  }
+
+  tasks.named("compileJava").configure {
+    options.compilerArgs += [
+            "--add-modules", "jdk.incubator.vector"
+    ]
+  }
+}

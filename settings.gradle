@@ -1,0 +1,19 @@
+pluginManagement {
+  repositories {
+    mavenCentral()
+    gradlePluginPortal()
+  }
+}
+
+dependencyResolutionManagement {
+  versionCatalogs {
+    deps {
+      from(files('versions.toml'))
+    }
+  }
+}
+
+rootProject.name = 'service-test1'
+
+include 'core'
+include 'core.service'
