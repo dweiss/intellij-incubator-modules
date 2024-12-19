@@ -1,8 +1,28 @@
 plugins {
   id 'base'
+  id 'idea'
+}
+
+idea {
+  project {
+    ipr {
+      //you can tinker with the output *.ipr file before it's written out
+      withXml {
+        def node = it.asNode()
+
+        node.appendNode('component', [name: 'JavacSettings']).with {
+          appendNode('option', [name: "ADDITIONAL_OPTIONS_OVERRIDE"]).with {
+            appendNode('module', [name: 'core.service', options: '--add-modules jdk.incubator.vector']);
+          }
+        }
+      }
+    }
+  }
 }
 
 allprojects {
+  apply plugin: "idea"
+
   group "com.carrotsearch.exp"
   version "1.0.0"
 }
@@ -29,3 +49,13 @@ configure(project(":core.service")) {
     ]
   }
 }
+
+/*
+ipr file:
+
+ <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="core.service" options="--add-modules jdk.incubator.vector" />
+    </option>
+  </component>
+ */
