@@ -1,0 +1,10 @@
+2517-vector-math-benchmark, c292e603fe1bdf32185a750aed663c554131d939
+
+SET JVMARGS=--add-modules jdk.incubator.vector
+
+--enable-preview for Lucene?
+
+- create a project that uses "normal" preview options and jdk incubator module options. how does it compile? what does it need at runtime?
+  does intellij support it out of the box?
+
+- make the above project export a service. would that service load/be exported properly?
